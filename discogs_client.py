@@ -279,7 +279,7 @@ class Label(APIBase):
         return self.data.get('releases')
 
 class Search(APIBase):
-    def __init__(self, query, page=1):
+    def __init__(self, query, page=1, **kwargs):
         self._id = query
         self._results = {}
         self._exactresults = []
@@ -287,6 +287,7 @@ class Search(APIBase):
         APIBase.__init__(self)
         self._params['q'] = self._id
         self._params['page'] = self._page
+        self._params.update(kwargs)
 
     def _to_object(self, result):
         id = result['title']
